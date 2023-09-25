@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "11209327262",
+    "project_id": "clontelegram-48d79",
+    "storage_bucket": "clontelegram-48d79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11209327262:android:13c439e4771ada53d4f18f",
+        "android_client_info": {
+          "package_name": "com.example.clontelegram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11209327262-97l43eq4car1af3iuasv4udqr12sh5r8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnAg7dv11ss9PLoMNg2W7bwT1kr1poIUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11209327262-97l43eq4car1af3iuasv4udqr12sh5r8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
