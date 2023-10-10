@@ -8,21 +8,21 @@ import com.example.clontelegram.R
 import com.example.clontelegram.databinding.FragmentChangeUserNameBinding
 import com.example.clontelegram.utils.APP_ACTIVITY
 import com.example.clontelegram.utils.AppValueEventListener
-import com.example.clontelegram.utils.CHILD_USERNAME
-import com.example.clontelegram.utils.NODE_USERNAMES
-import com.example.clontelegram.utils.NODE_USERS
-import com.example.clontelegram.utils.REF_DATABASE_ROOT
-import com.example.clontelegram.utils.CURRENT_UID
-import com.example.clontelegram.utils.USER
+import com.example.clontelegram.database.NODE_USERNAMES
+import com.example.clontelegram.database.REF_DATABASE_ROOT
+import com.example.clontelegram.database.CURRENT_UID
+import com.example.clontelegram.database.USER
+import com.example.clontelegram.database.updateCurrentUserName
 import com.example.clontelegram.utils.showToast
 import java.util.Locale
 
 
+/* Фрагмент для изменения username пользователя */
 class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_user_name) {
 
     private lateinit var binding: FragmentChangeUserNameBinding
 
-    lateinit var mNewUsername:String
+    lateinit var mNewUserName:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,13 +41,13 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_user_
 
 
     override fun change() = with(binding) {
-      mNewUsername = settingsInputUsername.text.toString().toLowerCase(Locale.getDefault())
-      if (mNewUsername.isEmpty()){
+      mNewUserName = settingsInputUsername.text.toString().toLowerCase(Locale.getDefault())
+      if (mNewUserName.isEmpty()){
           showToast("Поле пустое")
       }else{
           REF_DATABASE_ROOT.child(NODE_USERNAMES)
               .addListenerForSingleValueEvent(AppValueEventListener{
-                  if (it.hasChild(mNewUsername)){
+                  if (it.hasChild(mNewUserName)){
                       showToast("Такой пользователь существует")
                   }else{
                       changeUserName()
@@ -57,38 +57,17 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_user_
     }
 
     private fun changeUserName() {
-        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(mNewUsername).setValue(CURRENT_UID)
+        /* Изменение username в базе данных */
+        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(mNewUserName).setValue(CURRENT_UID)
             .addOnCompleteListener {
                 if (it.isSuccessful){
-                    updateCurrentUserName()
+                    updateCurrentUserName(mNewUserName)
                 }
             }
     }
 
-    private fun updateCurrentUserName() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_USERNAME)
-            .setValue(mNewUsername)
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                    showToast(getString(R.string.toast_data_update))
-                    deleteOldUserName()
-                }else{
-                    showToast(it.exception?.message.toString())
-                }
-            }
-    }
 
-    private fun deleteOldUserName() {
-        REF_DATABASE_ROOT.child(NODE_USERNAMES).child(USER.username).removeValue()
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                    showToast(getString(R.string.toast_data_update))
-                    fragmentManager?.popBackStack()
-                    USER.username = mNewUsername
-                }else{
-                    showToast(it.exception?.message.toString())
-                }
-            }
-    }
+
+
 
 }

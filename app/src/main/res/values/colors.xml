@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorBlack">#FF000000</color>
+    <color name="colorGreen">#AAE88A</color>
     <color name="white">#FFFFFFFF</color>
     <color name="ColorPrimary">#0088cc</color>
     <color name="colorPrimaryDark">#007Acc</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorAccentDark">#D1CDCD</color>
     <color name="colorGrey">#837E7E</color>
+    <color name="colorBlueWish">#58D6EC</color>
 
     <!-- Material DEFAULT colors -->
     <color name="material_drawer_primary">#2196F3</color>

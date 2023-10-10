@@ -1,1 +1,11 @@
+*.inl
+.gradle
+/local.properties
+.DS.Store
 /build
+/captures
+.externalNativeBuild
+.cxx
+/.idea
+google-services.json
+/app/build

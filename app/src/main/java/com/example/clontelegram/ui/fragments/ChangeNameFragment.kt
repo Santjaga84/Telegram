@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import com.example.clontelegram.R
 import com.example.clontelegram.databinding.FragmentChangeNameBinding
 import com.example.clontelegram.utils.APP_ACTIVITY
-import com.example.clontelegram.utils.CHILD_FULLNAME
-import com.example.clontelegram.utils.NODE_USERS
-import com.example.clontelegram.utils.REF_DATABASE_ROOT
-import com.example.clontelegram.utils.CURRENT_UID
-import com.example.clontelegram.utils.USER
+import com.example.clontelegram.database.CHILD_FULLNAME
+import com.example.clontelegram.database.NODE_USERS
+import com.example.clontelegram.database.REF_DATABASE_ROOT
+import com.example.clontelegram.database.CURRENT_UID
+import com.example.clontelegram.database.USER
+import com.example.clontelegram.database.setNameToDatabase
 import com.example.clontelegram.utils.showToast
 
+/* Фрагмент для изменения имени пользователя */
 class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
 
     private lateinit var binding: FragmentChangeNameBinding
@@ -50,15 +52,11 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
             showToast(getString(R.string.settings_toast_name_isEmpty))
         }else{
             val fullname = "$name $surname"
-            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME)
-                .setValue(fullname).addOnCompleteListener {
-                    if (it.isSuccessful){
-                        showToast(getString(R.string.toast_data_update))
-                        USER.fullname = fullname
-                        APP_ACTIVITY.mAppDriver.updateHeader()
-                        fragmentManager?.popBackStack()
-                    }
-                }
+            setNameToDatabase(fullname)
+
+
         }
     }
+
+
 }

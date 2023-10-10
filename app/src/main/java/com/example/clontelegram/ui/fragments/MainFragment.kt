@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.clontelegram.R
 import com.example.clontelegram.databinding.FragmentChatBinding
-import com.example.clontelegram.databinding.FragmentEnterCodeBinding
+import com.example.clontelegram.utils.APP_ACTIVITY
+import com.example.clontelegram.utils.hideKeyboard
 
-
-class ChatsFragment : Fragment() {
+/* Главный фрагмент, содержит все чаты, группы и каналы с которыми взаимодействует пользователь*/
+class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentChatBinding  // Объявление переменной привязки
 
@@ -26,6 +26,8 @@ class ChatsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
+        APP_ACTIVITY.title = "Telegram"
+        APP_ACTIVITY.mAppDriver.enableDrawer()
+        hideKeyboard()
     }
 }

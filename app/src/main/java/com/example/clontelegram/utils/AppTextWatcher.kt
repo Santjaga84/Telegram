@@ -3,6 +3,7 @@ package com.example.clontelegram.utils
 import android.text.Editable
 import android.text.TextWatcher
 
+/* Модификация класса TextWatcher */
 class AppTextWatcher(val onSuccess:(Editable?) ->Unit):TextWatcher {
 
     override fun afterTextChanged(s: Editable?) {

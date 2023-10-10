@@ -1,6 +1,7 @@
 package com.example.clontelegram.models
 
-data class User(
+/* Модель для User*/
+data class UserModel(
     val id:String = "",
     var username:String = "",
     var bio:String = "",

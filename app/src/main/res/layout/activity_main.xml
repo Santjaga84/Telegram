@@ -14,6 +14,12 @@
         app:layout_constraintTop_toTopOf="parent"
         style="@style/mainToolbar" />
 
+    <include
+        android:id="@+id/toolbarInfo"
+        layout="@layout/toolbar_info"
+        android:visibility="gone"
+        />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dataContainer"
         android:layout_width="match_parent"
